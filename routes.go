@@ -19,9 +19,9 @@ var routes = Routes{
         Index,
     },
     Route{
-        "Message",
+        "Messasge",
         "POST",
-        "/todos",
+        "/message",
         Message,
     },
 }

@@ -16,7 +16,8 @@ func Index(w http.ResponseWriter, r *http.Request) {
     // http.ServeContent(w, r, StoredAs, time.Now(),   bytes.NewReader(data))
 
     // http.ServeFile(w, r, r.URL.Path[1:])
-    fmt.Fprintln(w, "Welcome!")
+    fs := http.FileServer(http.Dir("static"))
+        http.Handle("/index", fs)
 }
 
 func Message(w http.ResponseWriter, r *http.Request) {
