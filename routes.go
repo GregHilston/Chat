@@ -18,10 +18,4 @@ var routes = Routes{
         "/",
         Index,
     },
-    Route{
-        "Messasge",
-        "POST",
-        "/message",
-        Message,
-    },
 }
