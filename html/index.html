@@ -1,3 +1,21 @@
+<!DOCTYPE html>
 <html>
-    Hello World! HTML
+	<style>
+		textarea {
+    		resize: none;
+		}	
+	</style>
+
+	<head>
+		<title>Chat</title>
+	</head>
+	
+	<body>
+		<textarea readonly="True"> </textarea>
+
+		<form action="/messages" method="post">
+			<input type="text" name="message" placeholder="Enter message here..." autofocus="True">
+			<input type="submit" value="Submit">
+  		</form>
+	</body>
 </html>
