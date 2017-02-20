@@ -8,12 +8,20 @@
 
 	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <script type="text/javascript">
-      $(function(){
-        $('form').on('submit', function(e){
- 			/* stop form from submitting normally and redirecting or refreshing */
-      		e.preventDefault();
-        });
-      });
+		$(function(){
+			$('form').on('submit', function(e){
+				e.preventDefault();	// stops form from submitting normally and redirecting or refreshing
+				
+				$.ajax({
+					type: 'post',
+					url: '/messages',
+					data:$('#myForm').serialize(),
+					success:function(){}				
+				});
+
+				$("form").trigger("reset");
+			});
+		});
 	</script>
 
 	<head>
@@ -23,7 +31,7 @@
 	<body>
 		<textarea readonly="True"> </textarea>
 
-		<form action="/messages" method="post">
+		<form action="/messages" method="post" id="myForm">
 			<input type="text" name="message" placeholder="Enter message here..." autofocus="True">
 			<input type="submit" value="Submit">
   		</form>
