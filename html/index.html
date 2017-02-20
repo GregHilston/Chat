@@ -6,6 +6,16 @@
 		}	
 	</style>
 
+	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script type="text/javascript">
+      $(function(){
+        $('form').on('submit', function(e){
+ 			/* stop form from submitting normally and redirecting or refreshing */
+      		e.preventDefault();
+        });
+      });
+	</script>
+
 	<head>
 		<title>Chat</title>
 	</head>
