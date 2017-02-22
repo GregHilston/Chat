@@ -18,10 +18,16 @@ var routes = Routes{
         "/",
         Index,
     },
-        Route{
+    Route{
         "Messasges",
         "POST",
         "/messages",
         Messages,
+    },
+    Route{
+        "SocketHandler",
+        "",
+        "/ws",
+        websocket.Handler(SocketHandler),
     },
 }

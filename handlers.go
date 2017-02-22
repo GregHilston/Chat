@@ -16,3 +16,7 @@ func Messages(w http.ResponseWriter, r *http.Request) {
     x := r.Form.Get("message")
     fmt.Println(x)
 }
+
+func SocketHandler(w http.ResponseWriter, r *http.Request) {
+	
+}
