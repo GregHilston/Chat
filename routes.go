@@ -19,15 +19,9 @@ var routes = Routes{
         Index,
     },
     Route{
-        "Messasges",
-        "POST",
-        "/messages",
-        Messages,
-    },
-    Route{
-        "SocketHandler",
-        "",
-        "/ws",
-        websocket.Handler(SocketHandler),
+    "WsHandler",
+    "GET",
+    "/ws",
+    wsHandler,
     },
 }
