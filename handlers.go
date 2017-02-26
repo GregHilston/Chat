@@ -11,6 +11,8 @@ type msg struct {
 	Message string
 }
 
+var sockets []*websocket.Conn
+
 func Index(w http.ResponseWriter, r *http.Request) {
 	content, err := ioutil.ReadFile("index.html")
 	if err != nil {
@@ -31,6 +33,8 @@ func wsHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Could not open websocket connection", http.StatusBadRequest)
 	}
 
+	sockets = append(sockets, conn)
+
 	go echo(conn)
 }
 
@@ -43,10 +47,21 @@ func echo(conn *websocket.Conn) {
 			fmt.Println("Error reading json.", err)
 		}
 
-		fmt.Printf("Got message: %#v\n", m)
+		fmt.Printf("message: %#v\n", m)
+
+		for index,element := range sockets {
+			fmt.Printf("allerting: %#v\n", index)
+			go alert(element, m)
+		}
 
 		if err = conn.WriteJSON(m); err != nil {
 			fmt.Println(err)
 		}
 	}
+}
+
+func alert(conn *websocket.Conn, m msg) {
+	// mu.Lock()
+	// defer p.mu.Unlock()
+	// conn.WriteJSON(m)
 }
