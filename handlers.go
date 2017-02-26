@@ -3,6 +3,7 @@ package main
 import (
     "fmt"
     "net/http"
+    "sync"
     "github.com/gorilla/websocket"
     "io/ioutil"
 )
@@ -11,6 +12,7 @@ type msg struct {
 	Message string
 }
 
+var mu sync.Mutex
 var sockets []*websocket.Conn
 
 func Index(w http.ResponseWriter, r *http.Request) {
@@ -50,18 +52,18 @@ func echo(conn *websocket.Conn) {
 		fmt.Printf("message: %#v\n", m)
 
 		for index,element := range sockets {
-			fmt.Printf("allerting: %#v\n", index)
+			fmt.Printf("alerting: %#v\n", index)
 			go alert(element, m)
 		}
 
-		if err = conn.WriteJSON(m); err != nil {
-			fmt.Println(err)
-		}
+		//if err = conn.WriteJSON(m); err != nil {
+		//	fmt.Println(err)
+		//}
 	}
 }
 
 func alert(conn *websocket.Conn, m msg) {
-	// mu.Lock()
-	// defer p.mu.Unlock()
-	// conn.WriteJSON(m)
+	mu.Lock()
+	defer mu.Unlock()
+	conn.WriteJSON(m)
 }
